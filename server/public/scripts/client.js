@@ -30,7 +30,17 @@ function setupClickListeners() {
 function getKoalas(){
   console.log( 'in getKoalas' );
   // ajax call to server to get koalas
-  
+  $.ajax({
+    method: 'GET',
+    url: '/koalas'
+  })
+  .then(function (response) {
+    console.log(response);
+    saveKoala(response);
+  })
+  .catch(error =>{
+    console.log('error in GET of koalas', error);
+  })
 } // end getKoalas
 
 function saveKoala( newKoala ){
@@ -47,4 +57,22 @@ function saveKoala( newKoala ){
       console.log('Error in POST', error)
       alert('Unable to add koala at this time. Please try again later.');
     });
+}
+
+function isReady(koalaId, isReady){
+$.ajax({
+  method: "PUT",
+  url: `/koalas/${koalaId}`,
+  data: {
+    readyForTransfer: isReady,
+  }
+})
+.then((response) =>{
+  console.log("I<3Koalas");
+  getKoalas();
+})
+.catch((err) =>{
+  console.log("no koalas for you!!");
+  alert("there was an error. take a break and go outside", err);
+})
 }
