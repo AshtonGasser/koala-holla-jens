@@ -47,8 +47,7 @@ router.put("/:id", (req, res) => {
         console.log("ya done goofed", err);
         res.sendStatus(500);
       });
-  });
-
+  })
 // DELETE
 
 module.exports = koalaRouter;
