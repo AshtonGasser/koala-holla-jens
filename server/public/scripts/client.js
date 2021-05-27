@@ -38,3 +38,21 @@ function saveKoala( newKoala ){
   // ajax call to server to get koalas
  
 }
+
+function isReady(koalaId, isReady){
+$.ajax({
+  method: "PUT",
+  url: `/koalas/${koalaId}`,
+  data: {
+    readyForTransfer: isReady,
+  }
+})
+.then((response) =>{
+  console.log("I<3Koalas");
+  getKoalas();
+})
+.catch((err) =>{
+  console.log("no koalas for you!!");
+  alert("there was an error. take a break and go outside", err);
+})
+}
