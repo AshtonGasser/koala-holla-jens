@@ -43,7 +43,7 @@ koalaRouter.put("/:id", (req, res) => {
     let readyForTransfer = req.body.readyForTransfer;
   
     let queryString = "";
-    if (readyForTransfer === "true") {
+    if (readyForTransfer === "TRUE") {
       queryString = 'UPDATE "ready-to-transfer" SET "readyForTransfer"=TRUE WHERE "koalas".id = $1';
     } else if (readyForTransfer === "false") {
       queryString = 'UPDATE "ready-to-transfer" SET "readyForTransfer"=FALSE WHERE "koalas".id = $1;';
