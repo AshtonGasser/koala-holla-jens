@@ -7,7 +7,7 @@ const pool = require('../modules/pool');
 
 // GET
 
-router.get('/', (req, res) => {
+koalaRouter.get('/', (req, res) => {
   let queryText = 'SELECT * FROM "koalas" ORDER BY "id";';
   pool.query(queryText).then(result => {
     // Sends back the results in an object
@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 });
 
 // POST
-router.post('/',  (req, res) => {
+koalaRouter.post('/',  (req, res) => {
     let newKoala = req.body;
     console.log(`Adding Koala`, newKoala);
   
@@ -37,7 +37,7 @@ router.post('/',  (req, res) => {
   });
 
 // PUT
-router.put("/:id", (req, res) => {
+koalaRouter.put("/:id", (req, res) => {
     const koalaId = req.params.id;
     
     let readyForTransfer = req.body.readyForTransfer;
@@ -61,8 +61,7 @@ router.put("/:id", (req, res) => {
         console.log("ya done goofed", err);
         res.sendStatus(500);
       });
-  });
-
+  })
 // DELETE
 
 module.exports = koalaRouter;
