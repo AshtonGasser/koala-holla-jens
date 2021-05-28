@@ -24,19 +24,36 @@ function setupClickListeners() {
     };
     // call saveKoala with the new obejct
     saveKoala( koalaToSend );
-  }); 
+  });
+
+  $('#viewKoalas').on('click', '.readyToTransfer', isReady);
 }
 
 function getKoalas(){
   console.log( 'in getKoalas' );
   // ajax call to server to get koalas
+  $('#viewKoalas').empty();
   $.ajax({
     method: 'GET',
     url: '/koalas'
   })
   .then(function (response) {
     console.log(response);
-    saveKoala(response);
+    for (let i = 0; i < response.length; i++) {
+      console.log(response[i]);
+      $('#viewKoalas').append(`
+          <tr>
+              <td>${response[i].name}</td>
+              <td>${response[i].gender}</td>
+              <td>${response[i].age}</td>
+              <td>${response[i].ready-to-transfer}</td>
+              <td>${response[i].notes}</td>
+              <td>
+                  <button class="readyToTransfer" data-id="${response[i].id}">Ready To Transfer</button>
+              </td>
+          </tr>
+      `);
+    }
   })
   .catch(error =>{
     console.log('error in GET of koalas', error);
@@ -52,7 +69,7 @@ function saveKoala( newKoala ){
     data: newKoala,
     }).then(function(response) {
       console.log('Response from server.', response);
-      refreshBooks();
+      getKoalas();
     }).catch(function(error) {
       console.log('Error in POST', error)
       alert('Unable to add koala at this time. Please try again later.');
