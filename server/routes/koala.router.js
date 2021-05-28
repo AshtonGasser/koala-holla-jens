@@ -24,9 +24,9 @@ koalaRouter.post('/',  (req, res) => {
     let newKoala = req.body;
     console.log(`Adding Koala`, newKoala);
   
-    let queryText = `INSERT INTO "koalas" ("name", "gender", "age", "ready-to-transfer", "notes")
+    let queryText = `INSERT INTO "koalas" ("name", "gender", "age", "readyForTransfer", "notes")
                      VALUES ($1, $2, $3, $4, $5);`;
-    pool.query(queryText, [newKoala.name, newKoala.gender, newKoala.age, newKoala.readyForTranfer, newKoala.notes])
+    pool.query(queryText, [newKoala.name, newKoala.gender, newKoala.age, newKoala.readyForTransfer, newKoala.notes])
       .then(result => {
         res.sendStatus(201);
       })
@@ -44,9 +44,9 @@ koalaRouter.put("/:id", (req, res) => {
   
     let queryString = "";
     if (readyForTransfer === "true") {
-      queryString = 'UPDATE "ready-to-transfer" SET "ready-to-transfer"=TRUE WHERE "koalas".id = $1';
+      queryString = 'UPDATE "ready-to-transfer" SET "readyForTransfer"=TRUE WHERE "koalas".id = $1';
     } else if (readyForTransfer === "false") {
-      queryString = 'UPDATE "ready-to-transfer" SET "ready-to-transfer"=FALSE WHERE "koalas".id = $1;';
+      queryString = 'UPDATE "ready-to-transfer" SET "readyForTransfer"=FALSE WHERE "koalas".id = $1;';
     } else {
       res.sendStatus(500);
       return; // early exit since its an error
