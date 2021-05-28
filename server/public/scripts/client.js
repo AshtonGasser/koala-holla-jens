@@ -26,7 +26,7 @@ function setupClickListeners() {
     saveKoala( koalaToSend );
   });
 
-  $('#viewKoalas').on('click', '.readyToTransfer', isReady);
+  $('#viewKoalas').on('click', '.readyToTransfer', handleKoala);
 }
 
 function getKoalas(){
@@ -75,7 +75,9 @@ function saveKoala( newKoala ){
       alert('Unable to add koala at this time. Please try again later.');
     });
 }
-
+function handleKoala(){
+  isReady($(this).data ("id"), "TRUE");
+}
 function isReady(koalaId, isReady){
 $.ajax({
   method: "PUT",
