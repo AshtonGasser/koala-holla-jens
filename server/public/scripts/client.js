@@ -26,7 +26,7 @@ function setupClickListeners() {
     saveKoala( koalaToSend );
   });
 
-  $('#viewKoalas').on('click', '.readyToTransfer', isReady);
+  $('#viewKoalas').on('click', '.readyToTransfer', handleKoala);
 }
 
 function getKoalas(){
